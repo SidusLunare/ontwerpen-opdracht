@@ -9,6 +9,8 @@ const CalorieTracker = () => {
   const [calories, setCalories] = useState(1950);
   const [inputValue, setInputValue] = useState(0);
   const [goalReached, setGoalReached] = useState(false);
+  const circleRadius = 45; // Nieuwe straal waarde
+  const circumference = 2 * Math.PI * circleRadius;
 
   useEffect(() => {
     if (!goalReached) {
@@ -18,7 +20,7 @@ const CalorieTracker = () => {
           start: 'top 80%',
           toggleActions: 'play none none none'
         },
-        strokeDashoffset: (1 - calories / 1950) * 314,
+        strokeDashoffset: (1 - calories / 1950) * circumference,
         duration: 1.5,
         ease: 'power1.inOut'
       });
@@ -54,18 +56,18 @@ const CalorieTracker = () => {
       <h2>Calorie Tracker</h2>
       <div className="progress-circle" id="calorieProgress">
         {goalReached ? (
-          <div className="check-mark">&#10003;</div>
+                  <div className="check-mark">&#10003;</div>
         ) : (
           <svg width="100" height="100" viewBox="0 0 100 100">
             <circle
               cx="50"
               cy="50"
-              r="50"
+              r={circleRadius}
               fill="none"
               stroke="#4caf50"
               strokeWidth="10"
-              strokeDasharray="314"
-              strokeDashoffset={(1 - calories / 1950) * 314}
+              strokeDasharray={circumference}
+              strokeDashoffset={(1 - calories / 1950) * circumference}
               id="calorieProgressFill"
             />
           </svg>

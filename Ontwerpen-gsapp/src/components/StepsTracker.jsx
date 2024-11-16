@@ -32,10 +32,16 @@ const StepsTracker = () => {
       snap: { textContent: 1 },
       ease: 'power1.inOut'
     });
+
+    gsap.to('#stepsProgressFill', {
+      width: `${Math.min(steps / 10000 * 100, 100)}%`,
+      duration: 1,
+      ease: 'power1.inOut'
+    });
   }, [steps]);
 
   const handleInputChange = (e) => {
-    setInputValue(parseInt(e.target.value, 10));
+    setInputValue(parseInt(e.target.value, 10) || 0);
   };
 
   const handleAddSteps = () => {
@@ -47,6 +53,9 @@ const StepsTracker = () => {
     <div className="steps-tracker">
       <h2>Stappenteller</h2>
       <div className="steps-counter" id="stepsCounter">{steps} stappen</div>
+      <div className="steps-progress-bar">
+        <div className="steps-progress-fill" id="stepsProgressFill"></div>
+      </div>
       <input
         type="number"
         value={inputValue}
